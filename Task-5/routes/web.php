@@ -17,9 +17,14 @@ use App\Http\Controllers\ProductController;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('addproducts', function () {
+    return view('layouts.addProductLayout');
+});
 Route::get('addProduct', [ProductController::class, 'show']);
 Route::post('addProduct', [ProductController::class, 'store']);
-Route::get('products', [ProductController::class, 'index']);
+Route::resource('products', ProductController::class);
+// Route::get('products', [ProductController::class, 'index']);
+// Route::get('products/{id}', [ProductController::class, 'find']);
 Route::get('editProduct/{id}', [ProductController::class, 'edit']);
 Route::put('updateProduct/{id}', [ProductController::class, 'update']);
 Route::get('deleteProduct/{id}', [ProductController::class, 'destroy']);

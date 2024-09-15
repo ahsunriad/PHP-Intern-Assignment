@@ -14,9 +14,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Product::all();
+        $search = $request->input('search');
+        if ($search) {
+            $data = Product::where('name', 'LIKE', "%{$search}%");
+            // dd($data);
+        }
+        else{
+            $data = Product::all();
+            // dd($data);
+
+        }
         return view('products', compact('data'));
     }
 
@@ -146,4 +155,6 @@ class ProductController extends Controller
         $data->delete();
         return redirect('products');
     }
+
+    
 }
